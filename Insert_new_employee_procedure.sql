@@ -24,17 +24,26 @@ Date_error exception;
 Email_unique exception;
 CountUnique number;
 Gender_notin exception;
+countSSN number;
+SSN_unique exception;
+MANAGEMENT_ID number;
+unique_management exception;
 
 begin
 
 
- 
+Select count(*) into MANAGEMENT_ID from management_company where M_ID=management_company.m_id;
 select count(*) into countUnique from employee where E_EMAIL = EMAIL;
+select count(*) into countSSN from employee where E_SSN = SSN;
 Select MAX(E_ID) into   MAXEMP_ID from employee;
 MaX_EID := MAXEMP_ID + 1;
 
+IF (MANAGEMENT_ID=0)
+Then raise unique_management;
+ELSIF(countSSN>0)
+then raise SSN_unique;
 
-IF (CountUnique> 0 )
+ELSIF (CountUnique> 0 )
 Then
 Raise Email_unique;
 
@@ -64,11 +73,15 @@ Else
   END IF;
 EXCEPTION
 When Contact_Len_error Then
-raise_application_error (-20001,'Contact number should be 10 digits');
+raise_application_error (-20001,'Contact number should be 10 digits and SSN should be 9 digits ');
 When Date_error Then
 raise_application_error (-20002,'Hiredate cannot be less than DOB');
 When Email_unique Then
 raise_application_error (-20003,'Email should be unique');
 When Gender_notin Then
-raise_application_error (-20004,'Gender values shouold be m or f');
+raise_application_error (-20004,'Gender values should be m or f');
+When SSN_unique Then
+raise_application_error (-20005,'SSN should be unique');
+When others then
+raise_application_error (-20006,'Management_id not present in parent table');
 end;
