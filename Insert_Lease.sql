@@ -1,3 +1,6 @@
+--Select * from Lease
+--EXec insert_lease5(3,2,'12-DEC-21',6,'Active',3000,'',8000,43,34,10,11,'Yes')
+
 create or replace PROCEDURE INSERT_LEASE (
 fk_LEASE_P_ID1 IN number, 
 fk_LEASE_C_ID1 IN number,
@@ -15,7 +18,7 @@ SUBLEASING_ALLOWED1 IN VARCHAR)
 
 IS
     L_STATUS_INCORRECT EXCEPTION;
-   SUBLEASING_ALLOWED_INCOREECT EXCEPTION;
+    SUBLEASING_ALLOWED_INCOREECT EXCEPTION;
     MaX_LID number;
     P_ID_count number;
     P_ID_EXCEPTION EXCEPTION;
@@ -33,16 +36,13 @@ L_ENDDATE:=ADD_MONTHS(L_STRTDATE1,L_ENDDATE1);
 L_PAY_DUEDATE1:=ADD_MONTHS(L_STRTDATE1,-1);
 Select count(*) into P_ID_count from Property where fk_LEASE_P_ID1=Property.P_ID;
 Select count(*) into C_ID_count from Customer where fk_LEASE_C_ID1=Customer.C_ID;
-Select l_status into current_status from Lease where fk_LEASE_C_ID1=fk_LEASE_C_ID;
+--Select L_status into current_status from Lease where fk_LEASE_C_ID1=fk_LEASE_C_ID;
 Select nvl(MAX(L_ID),0) into   MaX_LID from LEASE;
 MaX_LID := MaX_LID + 1;
 Curr_status:=current_status;
 
 IF L_STATUS1 NOT IN ('Active','Completed','Broken') THEN 
     RAISE L_STATUS_INCORRECT;
-
-ELSIF SUBLEASING_ALLOWED1 NOT IN ('Yes','No') THEN 
-    RAISE SUBLEASING_ALLOWED_INCOREECT;
 
 ELSIF Curr_status ='Active' THEN
  RAISE ALREADY_ACTIVE_CUSTOMER;
@@ -52,6 +52,9 @@ Then raise P_ID_EXCEPTION;
 
 ELSIF (C_ID_count=0)
 Then raise C_ID_EXCEPTION;
+
+ELSIF SUBLEASING_ALLOWED1 NOT IN ('Yes','No') THEN
+    RAISE SUBLEASING_ALLOWED_INCOREECT;
 
 ELSE   
     INSERT INTO LEASE(L_ID, fk_LEASE_P_ID,fk_LEASE_C_ID,L_STRTDATE,L_ENDDATE,L_STATUS,MON_RENT,LEASE_BREAK_DATE,L_PAY_DUEDATE,DEPOSIT,KEYFEE,APPLICATION_FEE,LATEFEE,MISC,SUBLEASING_ALLOWED) 
@@ -65,12 +68,14 @@ EXCEPTION
                 DBMS_OUTPUT.PUT_LINE('Lease Status can only be Active/completed/Broken');
     WHEN P_ID_EXCEPTION THEN
                 DBMS_OUTPUT.PUT_LINE('Property ID not found in Parent table');
-    WHEN C_ID_EXCEPTION THEN
-                DBMS_OUTPUT.PUT_LINE('Customer ID not found in Parent table');
-  WHEN ALREADY_ACTIVE_CUSTOMER THEN
-                DBMS_OUTPUT.PUT_LINE('This customer already has an active Lease');
     WHEN SUBLEASING_ALLOWED_INCOREECT THEN
-                DBMS_OUTPUT.PUT_LINE('Subleasing Allowed can only be Yes/No');
+                DBMS_OUTPUT.PUT_LINE('Subleasing aloowed filed can only be Yes/No');
+    WHEN ALREADY_ACTIVE_CUSTOMER THEN
+                DBMS_OUTPUT.PUT_LINE('This customer already has an active Leases');
+     WHEN C_ID_EXCEPTION THEN
+                DBMS_OUTPUT.PUT_LINE('Customer ID not found in Parent table');
+  
                 
+
 
 END;
