@@ -1,4 +1,4 @@
-CREATE OR REPLACE PROCEDURE DELETE_ENTITY(ENTNAME varchar2,ENTTYPE varchar2) IS 
+create or replace PROCEDURE DROP_ENTITY(ENTNAME varchar2,ENTTYPE varchar2) IS 
 nCount NUMBER;
 BEGIN
 if ENTTYPE = 'TABLE' THEN
@@ -7,4 +7,4 @@ IF (nCount > 0) THEN
     EXECUTE IMMEDIATE 'drop table ' || ENTNAME || ' cascade constraints';
 END IF;
 END IF;
-END DELETE_ENTITY;
+END DROP_ENTITY;
