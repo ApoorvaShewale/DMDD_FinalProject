@@ -139,7 +139,7 @@ MaX_Comp_ID := MaX_Comp_ID + 1;
 END INSERT_COMPLAINT_TYPE;
 ---------------------------------------------------------------------
 
-PROCEDURE INSERT_LEASE (
+create or replace PROCEDURE INSERT_LEASE (
 fk_LEASE_P_ID1 IN number, 
 fk_LEASE_C_ID1 IN number,
 L_STRTDATE1 IN DATE,
@@ -167,7 +167,6 @@ IS
     Curr_status Varchar(30);
     L_ENDDATE DATE;
     L_PAY_DUEDATE1 DATE;
-    
 
 BEGIN
 
@@ -175,7 +174,7 @@ L_ENDDATE:=ADD_MONTHS(L_STRTDATE1,L_ENDDATE1);
 L_PAY_DUEDATE1:=ADD_MONTHS(L_STRTDATE1,-1);
 Select count(*) into P_ID_count from Property where fk_LEASE_P_ID1=Property.P_ID;
 Select count(*) into C_ID_count from Customer where fk_LEASE_C_ID1=Customer.C_ID;
-Select L_status into current_status from Lease where fk_LEASE_C_ID1=Lease.FK_LEASE_C_ID;
+Select L_status into current_status from Lease where fk_LEASE_C_ID1=Lease.fk_LEASE_C_ID;
 Select nvl(MAX(L_ID),0) into   MaX_LID from LEASE;
 MaX_LID := MaX_LID + 1;
 Curr_status:=current_status;
@@ -217,8 +216,10 @@ EXCEPTION
                 
 
 
-END INSERT_LEASE;
----------------------------------------------------------------------------------------------
+END;
+
+-----------------------------------------------------------------
+----------------------------
 
 PROCEDURE INSERT_PROP(fk_PROPERTY_M_ID1 IN number, fk_PROPERTY_O_ID1 IN number, P_TYPE1 IN VARCHAR, P_City1 IN VARCHAR,P_Street1 IN VARCHAR,P_State1 IN VARCHAR, P_Zip1 IN VARCHAR, P_Description1 IN VARCHAR, P_Configuration1 IN VARCHAR,P_Discount1 IN NUMBER,P_Date_Listed1 IN DATE,P_Floor1 IN NUMBER,P_Carpet_Area1 IN NUMBER) 
 IS
