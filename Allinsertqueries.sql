@@ -133,7 +133,7 @@ EXECUTE IMMEDIATE  'Insert into ADMIN.LEASE  values (4,4,12,to_date(''01-JUN-20'
 EXECUTE IMMEDIATE  'Insert into ADMIN.LEASE  values (5,5,5,to_date(''02-JUN-21'',''DD-MON-RR''),to_date(''02-JUN-22'',''DD-MON-RR''),''Active'',2500,null,to_date(''02-MAY-21'',''DD-MON-RR''),2500,30,75,200,50,''Yes'')';
 EXECUTE IMMEDIATE  'Insert into ADMIN.LEASE  values (6,6,6,to_date(''10-NOV-12'',''DD-MON-RR''),to_date(''27-OCT-13'',''DD-MON-RR''),''Broken'',2800,to_date(''27-MAY-13'',''DD-MON-RR''),to_date(''10-OCT-12'',''DD-MON-RR''),2800,30,75,250,50,''No'')';
 EXECUTE IMMEDIATE  'Insert into ADMIN.LEASE  values (7,7,7,to_date(''27-NOV-21'',''DD-MON-RR''),to_date(''27-NOV-22'',''DD-MON-RR''),''Active'',2500,null,to_date(''27-OCT-21'',''DD-MON-RR''),2500,30,75,200,50,''Yes'')';
-EXECUTE IMMEDIATE  'Insert into ADMIN.LEASE  values (8,8,8,to_date(''27-NOV-21'',''DD-MON-RR''),to_date(''27-NOV-22'',''DD-MON-RR''),''Active'',2500,null,to_date(''27-OCT-21'',''DD-MON-RR''),2500,30,75,200,50,''Yes'')';
+EXECUTE IMMEDIATE  'Insert into ADMIN.LEASE  values (8,8,8,to_date(''27-NOV-21'',''DD-MON-RR''),to_date(''27-NOV-22'',''DD-MON-RR''),''Active'',2500,null,to_date(''27-NOV-21'',''DD-MON-RR''),2500,30,75,200,50,''Yes'')';
 EXECUTE IMMEDIATE  'Insert into ADMIN.LEASE  values (9,9,9,to_date(''20-JAN-19'',''DD-MON-RR''),to_date(''20-JUL-19'',''DD-MON-RR''),''Broken'',2800,to_date(''20-MAY-19'',''DD-MON-RR''),to_date(''20-DEC-18'',''DD-MON-RR''),2800,30,75,250,50,''No'')';
 EXECUTE IMMEDIATE  'Insert into ADMIN.LEASE  values (10,10,10,to_date(''07-JUN-21'',''DD-MON-RR''),to_date(''07-JUN-22'',''DD-MON-RR''),''Active'',2500,null,to_date(''07-MAY-21'',''DD-MON-RR''),2500,30,75,200,50,''Yes'')';
 EXECUTE IMMEDIATE  'Insert into ADMIN.LEASE  values (11,11,11,to_date(''08-JUN-21'',''DD-MON-RR''),to_date(''08-JUN-22'',''DD-MON-RR''),''Active'',2500,null,to_date(''08-MAY-21'',''DD-MON-RR''),2500,30,75,200,50,''Yes'')';
@@ -142,7 +142,7 @@ EXECUTE IMMEDIATE  'Insert into ADMIN.LEASE  values (13,13,13,to_date(''15-NOV-2
 EXECUTE IMMEDIATE  'Insert into ADMIN.LEASE  values (14,14,14,to_date(''16-NOV-21'',''DD-MON-RR''),to_date(''16-NOV-22'',''DD-MON-RR''),''Active'',2500,null,to_date(''16-OCT-21'',''DD-MON-RR''),2500,30,75,200,50,''Yes'')';
 EXECUTE IMMEDIATE  'Insert into ADMIN.LEASE  values (15,15,15,to_date(''17-AUG-21'',''DD-MON-RR''),to_date(''17-AUG-22'',''DD-MON-RR''),''Active'',2500,null,to_date(''17-JUL-21'',''DD-MON-RR''),2500,30,75,200,50,''Yes'')';
 EXECUTE IMMEDIATE  'Insert into ADMIN.LEASE  values (16,16,16,to_date(''18-AUG-21'',''DD-MON-RR''),to_date(''18-AUG-22'',''DD-MON-RR''),''Active'',2500,null,to_date(''18-JUL-21'',''DD-MON-RR''),2500,30,75,200,50,''Yes'')';
-EXECUTE IMMEDIATE  'Insert into ADMIN.LEASE  values (17,17,17,to_date(''15-NOV-21'',''DD-MON-RR''),to_date(''15-NOV-22'',''DD-MON-RR''),''Active'',2500,null,to_date(''15-OCT-21'',''DD-MON-RR''),2500,30,75,200,50,''Yes'')';
+EXECUTE IMMEDIATE  'Insert into ADMIN.LEASE  values (17,17,17,to_date(''15-NOV-21'',''DD-MON-RR''),to_date(''15-NOV-22'',''DD-MON-RR''),''Active'',2500,null,to_date(''15-NOV-21'',''DD-MON-RR''),2500,30,75,200,50,''Yes'')';
 EXECUTE IMMEDIATE  'Insert into ADMIN.LEASE  values (18,18,18,to_date(''01-JUN-21'',''DD-MON-RR''),to_date(''01-JUN-22'',''DD-MON-RR''),''Active'',2500,null,to_date(''01-MAY-21'',''DD-MON-RR''),2500,30,75,200,50,''Yes'')';
 EXECUTE IMMEDIATE  'Insert into ADMIN.LEASE  values (19,19,19,to_date(''02-JUN-21'',''DD-MON-RR''),to_date(''02-JUN-22'',''DD-MON-RR''),''Active'',2500,null,to_date(''02-MAY-21'',''DD-MON-RR''),2500,30,75,200,50,''Yes'')';
 EXECUTE IMMEDIATE  'Insert into ADMIN.LEASE  values (20,20,20,to_date(''03-JUN-21'',''DD-MON-RR''),to_date(''03-JUN-22'',''DD-MON-RR''),''Active'',2500,null,to_date(''03-MAY-21'',''DD-MON-RR''),2500,30,75,200,50,''Yes'')';
@@ -290,6 +290,34 @@ EXECUTE IMMEDIATE  'Insert into ADMIN.CUSTOMER_CARD_DETAIL  values (17,480010609
 EXECUTE IMMEDIATE  'Insert into ADMIN.CUSTOMER_CARD_DETAIL  values (18,4800096615021110,18,to_date(''04-DEC-23'',''DD-MON-RR''),''Credit'',''Sean Richman'',925)';
 EXECUTE IMMEDIATE  'Insert into ADMIN.CUSTOMER_CARD_DETAIL  values (19,4800806951737220,19,to_date(''03-DEC-23'',''DD-MON-RR''),''Debit '',''Lala Marquez'',208)';
 EXECUTE IMMEDIATE  'Insert into ADMIN.CUSTOMER_CARD_DETAIL  values (20,4800521579367910,20,to_date(''11-DEC-25'',''DD-MON-RR''),''Credit'',''Derick Macey'',428)';
+COMMIT;
+
+---------------------------INSERTING CUSTOMER_PAYMENT----------------------------
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT values (1,1,2500,to_date(''29-MAR-21'',''DD-MON-RR''),''Complete'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT values (2,10,2500,to_date(''02-FEB-20'',''DD-MON-RR''),''Pending'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT values (3,10,1500,to_date(''14-APR-20'',''DD-MON-RR''),''Complete'',null)';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (4,11,4250,to_date(''03-MAY-20'',''DD-MON-RR''),''Complete'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (5,12,4000,to_date(''01-APR-20'',''DD-MON-RR''),''Complete'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (6,5,2500,to_date(''29-APR-21'',''DD-MON-RR''),''Complete'',''N'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (7,6,2800,to_date(''10-OCT-12'',''DD-MON-RR''),''Complete'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (8,7,1000,to_date(''27-OCT-21'',''DD-MON-RR''),''Pending'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (9,7,1700,to_date(''29-OCT-21'',''DD-MON-RR''),''Complete'',null)';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (10,8,1000,to_date(''27-NOV-21'',''DD-MON-RR''),''Pending'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (11,9,2800,to_date(''20-DEC-18'',''DD-MON-RR''),''Complete'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (12,10,2500,to_date(''07-MAY-21'',''DD-MON-RR''),''Complete'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (13,11,2500,to_date(''08-MAY-21'',''DD-MON-RR''),''Complete'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (14,12,500,to_date(''07-MAY-21'',''DD-MON-RR''),''Pending'',null)';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (15,12,1000,to_date(''08-MAY-21'',''DD-MON-RR''),''Pending'',null)';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (16,12,1000,to_date(''08-MAY-21'',''DD-MON-RR''),''Complete'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (17,13,2500,to_date(''15-OCT-21'',''DD-MON-RR''),''Complete'',''N'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (18,14,2500,to_date(''16-OCT-21'',''DD-MON-RR''),''Complete'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (19,15,2500,to_date(''17-JUL-21'',''DD-MON-RR''),''Complete'',''N'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (20,16,2500,to_date(''18-JUL-21'',''DD-MON-RR''),''Complete'',''N'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (21,17,500,to_date(''15-NOV-21'',''DD-MON-RR''),''Pending'',''N'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (22,18,2500,to_date(''01-MAY-21'',''DD-MON-RR''),''Complete'',''N'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (23,19,2500,to_date(''02-MAY-21'',''DD-MON-RR''),''Complete'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (24,20,1500,to_date(''03-MAY-21'',''DD-MON-RR''),''Pending'',''N'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (25,20,1000,to_date(''03-MAY-21'',''DD-MON-RR''),''Complete'',null)';
 COMMIT;
 
 
