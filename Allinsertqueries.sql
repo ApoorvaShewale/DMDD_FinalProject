@@ -293,31 +293,31 @@ EXECUTE IMMEDIATE  'Insert into ADMIN.CUSTOMER_CARD_DETAIL  values (20,480052157
 COMMIT;
 
 ---------------------------INSERTING CUSTOMER_PAYMENT----------------------------
-EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT values (1,1,2500,to_date(''29-MAR-21'',''DD-MON-RR''),''Complete'',''Y'')';
-EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT values (2,10,2500,to_date(''02-FEB-20'',''DD-MON-RR''),''Pending'',''Y'')';
-EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT values (3,10,1500,to_date(''14-APR-20'',''DD-MON-RR''),''Complete'',null)';
-EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (4,11,4250,to_date(''03-MAY-20'',''DD-MON-RR''),''Complete'',''Y'')';
-EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (5,12,4000,to_date(''01-APR-20'',''DD-MON-RR''),''Complete'',''Y'')';
-EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (6,5,2500,to_date(''29-APR-21'',''DD-MON-RR''),''Complete'',''N'')';
-EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (7,6,2800,to_date(''10-OCT-12'',''DD-MON-RR''),''Complete'',''Y'')';
-EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (8,7,1000,to_date(''27-OCT-21'',''DD-MON-RR''),''Pending'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT values (1,1,2655,to_date(''29-MAR-21'',''DD-MON-RR''),''Complete'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT values (2,10,2655,to_date(''02-FEB-20'',''DD-MON-RR''),''Pending'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT values (3,10,1655,to_date(''14-APR-20'',''DD-MON-RR''),''Complete'',null)';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (4,11,4305,to_date(''03-MAY-20'',''DD-MON-RR''),''Complete'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (5,12,4155,to_date(''01-APR-20'',''DD-MON-RR''),''Complete'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (6,5,2655,to_date(''29-APR-21'',''DD-MON-RR''),''Complete'',''N'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (7,6,2955,to_date(''10-OCT-12'',''DD-MON-RR''),''Complete'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (8,7,1155,to_date(''27-OCT-21'',''DD-MON-RR''),''Pending'',''Y'')';
 EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (9,7,1700,to_date(''29-OCT-21'',''DD-MON-RR''),''Complete'',null)';
-EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (10,8,1000,to_date(''27-NOV-21'',''DD-MON-RR''),''Pending'',''Y'')';
-EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (11,9,2800,to_date(''20-DEC-18'',''DD-MON-RR''),''Complete'',''Y'')';
-EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (12,10,2500,to_date(''07-MAY-21'',''DD-MON-RR''),''Complete'',''Y'')';
-EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (13,11,2500,to_date(''08-MAY-21'',''DD-MON-RR''),''Complete'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (10,8,1155,to_date(''27-NOV-21'',''DD-MON-RR''),''Pending'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (11,9,2955,to_date(''20-DEC-18'',''DD-MON-RR''),''Complete'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (12,10,2655,to_date(''07-MAY-21'',''DD-MON-RR''),''Complete'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (13,11,2655,to_date(''08-MAY-21'',''DD-MON-RR''),''Complete'',''Y'')';
 EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (14,12,500,to_date(''07-MAY-21'',''DD-MON-RR''),''Pending'',null)';
-EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (15,12,1000,to_date(''08-MAY-21'',''DD-MON-RR''),''Pending'',null)';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (15,12,1155,to_date(''08-MAY-21'',''DD-MON-RR''),''Pending'',null)';
 EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (16,12,1000,to_date(''08-MAY-21'',''DD-MON-RR''),''Complete'',''Y'')';
-EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (17,13,2500,to_date(''15-OCT-21'',''DD-MON-RR''),''Complete'',''N'')';
-EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (18,14,2500,to_date(''16-OCT-21'',''DD-MON-RR''),''Complete'',''Y'')';
-EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (19,15,2500,to_date(''17-JUL-21'',''DD-MON-RR''),''Complete'',''N'')';
-EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (20,16,2500,to_date(''18-JUL-21'',''DD-MON-RR''),''Complete'',''N'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (17,13,2655,to_date(''15-OCT-21'',''DD-MON-RR''),''Complete'',''N'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (18,14,2655,to_date(''16-OCT-21'',''DD-MON-RR''),''Complete'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (19,15,2655,to_date(''17-JUL-21'',''DD-MON-RR''),''Complete'',''N'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (20,16,2655,to_date(''18-JUL-21'',''DD-MON-RR''),''Complete'',''N'')';
 EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (21,17,500,to_date(''15-NOV-21'',''DD-MON-RR''),''Pending'',''N'')';
-EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (22,18,2500,to_date(''01-MAY-21'',''DD-MON-RR''),''Complete'',''N'')';
-EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (23,19,2500,to_date(''02-MAY-21'',''DD-MON-RR''),''Complete'',''Y'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (22,18,2655,to_date(''01-MAY-21'',''DD-MON-RR''),''Complete'',''N'')';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (23,19,3000,to_date(''02-MAY-21'',''DD-MON-RR''),''Complete'',''Y'')';
 EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (24,20,1500,to_date(''03-MAY-21'',''DD-MON-RR''),''Pending'',''N'')';
-EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (25,20,1000,to_date(''03-MAY-21'',''DD-MON-RR''),''Complete'',null)';
+EXECUTE IMMEDIATE 'INSERT into ADMIN.CUSTOMER_PAYMENT  values (25,20,1155,to_date(''03-MAY-21'',''DD-MON-RR''),''Complete'',null)';
 COMMIT;
 
 
