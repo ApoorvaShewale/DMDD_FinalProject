@@ -1,4 +1,4 @@
-CREATE OR REPLACE PACKAGE INSERT1
+CREATE OR REPLACE PACKAGE INSERT_UPDATE_PACKAGE
 AS
 procedure insert_new_customer ( FNAME IN VARCHAR,LNAME IN VARCHAR,PHONE IN NUMBER,EMAIL IN VARCHAR,DOB IN DATE,CITY IN VARCHAR,STREET IN VARCHAR,STATES IN VARCHAR,ZIPCODE IN Number,RFNAME IN VARCHAR,RLNAME IN VARCHAR,REFRELATION IN VARCHAR,REFPHONE IN NUMBER,REFADDRESS IN VARCHAR,DATE_ADDED IN DATE,SSN IN NUMBER,OCCUPATION IN VARCHAR,GENDER IN VARCHAR);
 procedure INSERT_COMPLAINT_TYPE (COMP_TYPE1 IN VARCHAR);
@@ -13,16 +13,21 @@ PROCEDURE ADD_CUSTBANKDETAILS(CUST_ID IN NUMBER,BNAME VARCHAR,ACCNBR NUMBER,BRNU
 PROCEDURE ADD_CUSTCARDDETAILS(C_NUM IN NUMBER,CUST_ID IN NUMBER,EXP_DT DATE,C_TYPE VARCHAR,CUST_NAME VARCHAR,CVV_NUM IN NUMBER);
 PROCEDURE ADD_COMPLAINT(PROP_ID IN NUMBER,COMPL_TYPE_ID IN NUMBER,COMP_DATE DATE,COMP_STATUS VARCHAR,C_DESC VARCHAR,C_SEVERITY VARCHAR,C_PRIORITY IN NUMBER);
 PROCEDURE ADD_CUSTOMERPAYMENT(CP_CUST_ID IN NUMBER,AMT_PAID IN NUMBER,PAY_DATE DATE,PAY_STATUS VARCHAR,AUTOPAY VARCHAR);
-END INSERT1;
+PROCEDURE UPDATE_LEASE_STATUS;
+PROCEDURE UPDATE_CUSTOMER_BANK_DETAIL(DET_ID IN NUMBER,BNAME VARCHAR,ACC_NBR IN NUMBER,BNK_RNUM IN NUMBER);
+PROCEDURE Rating(property_ID in Number);
+END INSERT_UPDATE_PACKAGE;
 /
 
 
 
 
 set define off;
-create or replace package body INSERT1
+------------------------------------------------Procedure for adding a new customer-------------------------------------------------------------------------------------------------
+create or replace package body INSERT_UPDATE_PACKAGE
 AS
-procedure insert_new_customer (FNAME IN VARCHAR,LNAME IN VARCHAR,PHONE IN NUMBER,EMAIL IN VARCHAR,DOB IN DATE,CITY IN VARCHAR,STREET IN VARCHAR,STATES IN VARCHAR,ZIPCODE IN Number,RFNAME IN VARCHAR,RLNAME IN VARCHAR,REFRELATION IN VARCHAR,REFPHONE IN NUMBER,REFADDRESS IN VARCHAR,DATE_ADDED IN DATE,SSN IN NUMBER,OCCUPATION IN VARCHAR,GENDER IN VARCHAR)
+procedure insert_new_customer (FNAME IN VARCHAR,LNAME IN VARCHAR,PHONE IN NUMBER,EMAIL IN VARCHAR,DOB IN DATE,CITY IN VARCHAR,STREET IN VARCHAR,STATES IN VARCHAR,
+ZIPCODE IN Number,RFNAME IN VARCHAR,RLNAME IN VARCHAR,REFRELATION IN VARCHAR,REFPHONE IN NUMBER,REFADDRESS IN VARCHAR,DATE_ADDED IN DATE,SSN IN NUMBER,OCCUPATION IN VARCHAR,GENDER IN VARCHAR)
 
 is
 
@@ -38,6 +43,9 @@ SSN_unique exception;
 ZIPCODE_NOTNUMBER exception;
 
 begin
+
+
+------------------checking for unique EMAIL AND SSN IN CUSTOMER TABLE----------------------------------------
 select count(*) into countUnique from CUSTOMER where C_EMAIL = EMAIL;
 select count(*) into countSSN from CUSTOMER where C_SSN = SSN;
 Select MAX(C_ID) into MAXCUST_ID from customer;
@@ -121,7 +129,7 @@ raise_application_error (-20006,'ZIPCODE SHOULD CONTAIN ONLY NUMBERS');
 end insert_new_customer;
 
 
---------------------------------------------
+------------------raising a complaint ------------------------------------------------------------------------------------
 PROCEDURE INSERT_COMPLAINT_TYPE (COMP_TYPE1 IN VARCHAR) 
 IS   
     MaX_Comp_ID number;
@@ -137,7 +145,8 @@ MaX_Comp_ID := MaX_Comp_ID + 1;
 
 
 END INSERT_COMPLAINT_TYPE;
----------------------------------------------------------------------
+
+------------------Creating a new lease------------------------------------------------------------------------------------
 
 PROCEDURE INSERT_LEASE (
 fk_LEASE_P_ID1 IN number, 
@@ -167,15 +176,14 @@ IS
     Curr_status Varchar(30);
     L_ENDDATE DATE;
     L_PAY_DUEDATE1 DATE;
-    
 
 BEGIN
-
+----------------------------checking if there is active lease on the current property------------------------------------------------------------------- 
 L_ENDDATE:=ADD_MONTHS(L_STRTDATE1,L_ENDDATE1);
 L_PAY_DUEDATE1:=ADD_MONTHS(L_STRTDATE1,-1);
 Select count(*) into P_ID_count from Property where fk_LEASE_P_ID1=Property.P_ID;
 Select count(*) into C_ID_count from Customer where fk_LEASE_C_ID1=Customer.C_ID;
-Select L_status into current_status from Lease where fk_LEASE_C_ID1=Lease.FK_LEASE_C_ID;
+Select L_status into current_status from Lease where fk_LEASE_C_ID1=Lease.fk_LEASE_C_ID;
 Select nvl(MAX(L_ID),0) into   MaX_LID from LEASE;
 MaX_LID := MaX_LID + 1;
 Curr_status:=current_status;
@@ -217,8 +225,9 @@ EXCEPTION
                 
 
 
-END INSERT_LEASE;
----------------------------------------------------------------------------------------------
+END;
+
+-----------------------------------------------------------------
 
 PROCEDURE INSERT_PROP(fk_PROPERTY_M_ID1 IN number, fk_PROPERTY_O_ID1 IN number, P_TYPE1 IN VARCHAR, P_City1 IN VARCHAR,P_Street1 IN VARCHAR,P_State1 IN VARCHAR, P_Zip1 IN VARCHAR, P_Description1 IN VARCHAR, P_Configuration1 IN VARCHAR,P_Discount1 IN NUMBER,P_Date_Listed1 IN DATE,P_Floor1 IN NUMBER,P_Carpet_Area1 IN NUMBER) 
 IS
@@ -233,6 +242,8 @@ IS
     mgmt_start_date DATE;
 
 BEGIN
+
+---------checking if mamagement ID and the owner ID exist in parant table MANAGEMENT_COMPANY and OWNER-----------------------------------
 
 Select count(*) into M_ID_count from MANAGEMENT_COMPANY where fk_PROPERTY_M_ID1=MANAGEMENT_COMPANY.M_ID;
 Select count(*) into O_ID_count from OWNER where fk_PROPERTY_O_ID1=OWNER.O_ID;
@@ -276,7 +287,7 @@ EXCEPTION
 
 END INSERT_PROP;
 
-----------------------------------------------------------------------------------------------------------
+------------------------------insert new utility-----------------------------
 
 PROCEDURE INSERT_UTILITY (fk_UTILITY_P_ID1 IN number, Utility_TYPE1 IN VARCHAR, Availibility1 IN VARCHAR) 
 IS
@@ -287,7 +298,7 @@ IS
     P_ID2_EXCEPTION EXCEPTION;
 
 BEGIN
-
+---------------------------------check if the property exist for which the utility is to be ----------------------------------------
 Select count(*) into P_ID2_count from Property where fk_UTILITY_P_ID1=Property.P_ID;
 Select nvl(MAX(U_ID),0) into  MaX_UID from UTILITY;
 MaX_UID := MaX_UID + 1;
@@ -449,7 +460,17 @@ When DATE_ERROR Then
 raise_application_error (-20007,'Startdate cannot be greater than End date');
 end insert_new_management;
 -----------------------------------------------------------------------------------------------------
-PROCEDURE ADD_FEEDBACK(PROP_ID IN NUMBER,DESCRP VARCHAR,RAT_MAINT IN NUMBER,RAT_CLEAN IN NUMBER,RAT_AMEN IN NUMBER,RAT_UTI IN NUMBER,RAT_LOC IN NUMBER,RAT_RENT IN NUMBER,RAT_APTCOND IN NUMBER,RAT_RECOMM IN NUMBER,FEED_DATE DATE) 
+PROCEDURE ADD_FEEDBACK(PROP_ID IN NUMBER,
+DESCRP VARCHAR,
+RAT_MAINT IN NUMBER,
+RAT_CLEAN IN NUMBER,
+RAT_AMEN IN NUMBER,
+RAT_UTI IN NUMBER,
+RAT_LOC IN NUMBER,
+RAT_RENT IN NUMBER,
+RAT_APTCOND IN NUMBER,
+RAT_RECOMM IN NUMBER,
+FEED_DATE DATE) 
 
 IS 
 
@@ -458,6 +479,7 @@ NEW_F_ID NUMBER;
 PROPERTY_ID NUMBER;
 PROPERTY_ID_EXCEPTION EXCEPTION;
 RAT_EXCEPTION EXCEPTION;
+RATNUM_EXCEPTION EXCEPTION;
 
 BEGIN
 Select count(*) into PROPERTY_ID from PROPERTY where PROP_ID=PROPERTY.P_ID;
@@ -467,8 +489,12 @@ NEW_F_ID := MAX_F_ID +1;
 
 IF (PROPERTY_ID=0) THEN
     RAISE PROPERTY_ID_EXCEPTION;
-ELSIF is_number(RAT_MAINT)=0 OR is_number(RAT_CLEAN)=0 OR is_number(RAT_AMEN)=0 OR is_number(RAT_UTI)=0 OR is_number(RAT_LOC)=0 OR is_number(RAT_RENT)=0 OR is_number(RAT_APTCOND)=0 OR is_number(RAT_RECOMM)=0 THEN
+ELSIF RAT_MAINT>5 OR RAT_CLEAN>5 OR RAT_AMEN>5 OR RAT_UTI>5 OR RAT_LOC>5 OR RAT_RENT>5 OR RAT_APTCOND>5 OR RAT_RECOMM>5 THEN
     RAISE RAT_EXCEPTION;
+ELSIF RAT_MAINT<0 OR RAT_CLEAN<0 OR RAT_AMEN<0 OR RAT_UTI<0 OR RAT_LOC<0 OR RAT_RENT<0 OR RAT_APTCOND<0 OR RAT_RECOMM<0 THEN
+    RAISE RAT_EXCEPTION;
+ELSIF is_number(RAT_MAINT)=0 OR is_number(RAT_CLEAN)=0 OR is_number(RAT_AMEN)=0 OR is_number(RAT_UTI)=0 OR is_number(RAT_LOC)=0 OR is_number(RAT_RENT)=0 OR is_number(RAT_APTCOND)=0 OR is_number(RAT_RECOMM)=0 THEN
+    RAISE RATNUM_EXCEPTION;
 ELSE
 INSERT INTO FEEDBACK(F_ID,FK_P_ID,F_DESCRIPTION,F_RATING_MAINTAINANCE,F_RATING_CLEANLINESS,F_RATING_AMENITIES,F_RATING_UTILITIES,F_RATING_LOCATION,F_RATING_RENT,F_RATING_APTCONDITION,F_RATING_RECOMMENDATION,F_DATE)
 VALUES (NEW_F_ID,PROP_ID,DESCRP,RAT_MAINT,RAT_CLEAN,RAT_AMEN,RAT_UTI,RAT_LOC,RAT_RENT,RAT_APTCOND,RAT_RECOMM,FEED_DATE);
@@ -479,8 +505,9 @@ EXCEPTION
     WHEN PROPERTY_ID_EXCEPTION THEN
         DBMS_OUTPUT.PUT_LINE('PROPERTY ID NOT PRESENT IN PROPERTY TABLE');
     WHEN RAT_EXCEPTION THEN
-        DBMS_OUTPUT.PUT_LINE('ENTER A NUMBER BETWEEN 1 TO 5');
-        
+        DBMS_OUTPUT.PUT_LINE('RATINGS SHOULD BE BETWEEN BETWEEN 1 TO 5');
+    WHEN RATNUM_EXCEPTION THEN
+        DBMS_OUTPUT.PUT_LINE('PLEASE ENTER A NUMBER');
 END ADD_FEEDBACK;
 -----------------------------------------------------------------------------------------------------------------
 procedure insert_new_Owner( 
@@ -564,11 +591,13 @@ raise_application_error (-20006,'ZIPCODE SHOULD CONTAIN ONLY NUMBERS and should 
 end insert_new_Owner;
 
 ---------------------------------------------------------------------------------------------------------
-PROCEDURE ADD_CUSTBANKDETAILS(CUST_ID IN NUMBER,BNAME VARCHAR,ACCNBR NUMBER,BRNUM NUMBER,LUPDATED DATE) IS 
+PROCEDURE ADD_CUSTBANKDETAILS(CUST_ID IN NUMBER,BNAME VARCHAR,ACCNBR IN NUMBER,BRNUM IN NUMBER,LUPDATED DATE) IS 
 
 CUST_ID_EXCEPTION EXCEPTION;
 ACCNBR_EXCEPTION EXCEPTION;
 BRNUM_EXCEPTION EXCEPTION;
+ACCNBR_LEN_EXCEPTION EXCEPTION;
+BRNUM_LEN_EXCEPTION EXCEPTION;
 MAX_DETAIL_ID NUMBER;
 NEW_DETAIL_ID NUMBER;
 CUSTOMER_ID NUMBER;
@@ -585,6 +614,10 @@ ELSIF is_number(BRNUM)=0 THEN
     RAISE BRNUM_EXCEPTION;
 ELSIF (CUSTOMER_ID=0) THEN
     RAISE CUST_ID_EXCEPTION;
+ELSIF LENGTH(ACCNBR)<>10 THEN
+    RAISE ACCNBR_LEN_EXCEPTION;
+ELSIF LENGTH(BRNUM)<>8 THEN
+    RAISE BRNUM_LEN_EXCEPTION;
 ELSE
 INSERT INTO customer_bank_detail(DETAIL_ID,FK_CBD_C_ID,BANKNAME,ACCOUNT_NUMBER,BANK_ROUTINGNUMBER,LAST_UPDATED) VALUES (NEW_DETAIL_ID,CUST_ID,BNAME,ACCNBR,BRNUM,LUPDATED);
 COMMIT;
@@ -597,6 +630,10 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('CUSTOMER ID NOT PRESENT IN CUSTOMER TABLE');
     WHEN BRNUM_EXCEPTION THEN
         DBMS_OUTPUT.PUT_LINE('BANK ROUTING NUMBER SHOULD BE A NUMBER');
+    WHEN ACCNBR_LEN_EXCEPTION THEN
+        DBMS_OUTPUT.PUT_LINE('ACCOUNT NUMBER SHOULD BE OF 10 DIGITS');
+    WHEN BRNUM_LEN_EXCEPTION THEN
+        DBMS_OUTPUT.PUT_LINE('BANK ROUTING NUMBER SHOULD BE OF 8 DIGITS');
 END ADD_CUSTBANKDETAILS;
 
 ----------------------------------------------------------------------------------------------------
@@ -620,7 +657,7 @@ IF (CUSTOMER_ID=0) THEN
     RAISE CUST_ID_EXCEPTION;
 ELSIF LENGTH(C_NUM)<>16 THEN
     RAISE C_NUM_EXCEPTION;
-ELSIF EXP_DT < DATE '2021-12-07' THEN
+ELSIF EXP_DT < SYSDATE THEN
     RAISE EXP_DT_EXCEPTION;
 ELSIF LENGTH(CVV_NUM) <> 3 THEN
     RAISE CVV_NUM_EXCEPTION;
@@ -640,9 +677,14 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('CUSTOMER ID NOT PRESENT IN CUSTOMER TABLE');
 END ADD_CUSTCARDDETAILS;
 
-
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
-PROCEDURE ADD_COMPLAINT(PROP_ID IN NUMBER,COMPL_TYPE_ID IN NUMBER,COMP_DATE DATE,COMP_STATUS VARCHAR,C_DESC VARCHAR,C_SEVERITY VARCHAR,C_PRIORITY IN NUMBER)
+PROCEDURE ADD_COMPLAINT(PROP_ID IN NUMBER,
+COMPL_TYPE_ID IN NUMBER,
+COMP_DATE DATE,
+COMP_STATUS VARCHAR,
+C_DESC VARCHAR,
+C_SEVERITY VARCHAR,
+C_PRIORITY IN NUMBER)
 
 IS 
 
@@ -703,7 +745,6 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('COMPLAINT PRIORITY SHOULD BE NUMBER');
 END ADD_COMPLAINT;
 
-
 -----------------------------------------------------------------------------------------------------------
 PROCEDURE ADD_CUSTOMERPAYMENT(CP_CUST_ID IN NUMBER,
 AMT_PAID IN NUMBER,
@@ -752,4 +793,124 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('AMOUNT PAID SHOULD BE A NUMBER');
 END ADD_CUSTOMERPAYMENT;
 
+------------------------------------------------------------------------------------------------------------------------------------
+
+PROCEDURE UPDATE_LEASE_STATUS
+IS
+    CURR_DATE DATE;
+BEGIN
+    --SELECT in_patient_id into temp_pat_id FROM LEASE WHERE L_ENDDATE<CURR_DATE;
+    SELECT SYSDATE INTO CURR_DATE FROM DUAL;
+    UPDATE LEASE SET L_STATUS = 'Completed' WHERE L_ENDDATE<CURR_DATE AND L_STATUS = 'Active';
+    DBMS_OUTPUT.PUT_LINE('Lease status - updated successfully');
+    COMMIT;
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Lease status - record not found ');
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE(SQLERRM);
+END UPDATE_LEASE_STATUS;
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+PROCEDURE UPDATE_CUSTOMER_BANK_DETAIL(DET_ID IN NUMBER,
+BNAME VARCHAR,
+ACC_NBR IN NUMBER,
+BNK_RNUM IN NUMBER
+)
+
+IS
+D_ID NUMBER;
+ACCNBR_EXCEPTION EXCEPTION;
+BRNUM_EXCEPTION EXCEPTION;
+ACCNBR_LEN_EXCEPTION EXCEPTION;
+BRNUM_LEN_EXCEPTION EXCEPTION;
+
+BEGIN
+    Select count(*) into D_ID from CUSTOMER_BANK_DETAIL where DET_ID=CUSTOMER_BANK_DETAIL.DETAIL_ID;
+    IF D_ID =0 THEN
+        RAISE NO_DATA_FOUND;
+    ELSIF is_number(ACC_NBR)=0 THEN
+        RAISE ACCNBR_EXCEPTION;
+    ELSIF is_number(BNK_RNUM)=0 THEN
+        RAISE BRNUM_EXCEPTION;
+    ELSIF LENGTH(ACC_NBR)<>10 THEN
+        RAISE ACCNBR_LEN_EXCEPTION;
+    ELSIF LENGTH(BNK_RNUM)<>8 THEN
+        RAISE BRNUM_LEN_EXCEPTION;
+    ELSE
+        UPDATE CUSTOMER_BANK_DETAIL SET BANKNAME = BNAME, ACCOUNT_NUMBER = ACC_NBR, BANK_ROUTINGNUMBER = BNK_RNUM, LAST_UPDATED = SYSDATE  WHERE CUSTOMER_BANK_DETAIL.DETAIL_ID = DET_ID;
+        DBMS_OUTPUT.PUT_LINE('Customer Bank Details - updated successfully');
+    COMMIT;
+    END IF;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Customer Bank - record not found ');
+    WHEN ACCNBR_EXCEPTION THEN
+        DBMS_OUTPUT.PUT_LINE('ACCOUNT NUMBER SHOULD BE A NUMBER');
+    WHEN BRNUM_EXCEPTION THEN
+        DBMS_OUTPUT.PUT_LINE('BANK ROUTING NUMBER SHOULD BE A NUMBER');
+    WHEN ACCNBR_LEN_EXCEPTION THEN
+        DBMS_OUTPUT.PUT_LINE('ACCOUNT NUMBER SHOULD BE OF 10 DIGITS');
+    WHEN BRNUM_LEN_EXCEPTION THEN
+        DBMS_OUTPUT.PUT_LINE('BANK ROUTING NUMBER SHOULD BE OF 8 DIGITS');
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE(SQLERRM);
+END UPDATE_CUSTOMER_BANK_DETAIL;
+
+-----------------Get Rating of any property------------------------------------------------------------
+PROCEDURE Rating(property_ID in Number)
+IS
+val1 Number;
+val2 number;
+val3 Number;
+val4 number;
+val5 Number;
+val6 number;
+val7 Number;
+val8 number;
+avg_rating Number;
+F_P_ID_count number;
+F_P_ID_EXCEPTION EXCEPTION;
+
+
+
+BEGIN
+Select count(*) into F_P_ID_count from Property where property_ID=Property.P_ID;
+
+
+
+
+
+IF (F_P_ID_count=0)
+Then raise F_P_ID_EXCEPTION;
+
+
+
+ELSE
+Select avg(F_RATING_MAINTAINANCE) into val1 from Feedback where property_ID=Feedback.FK_P_ID;
+Select avg(F_RATING_CLEANLINESS) into val2 from Feedback where property_ID=Feedback.FK_P_ID;
+Select avg(F_RATING_AMENITIES) into val3 from Feedback where property_ID=Feedback.FK_P_ID;
+Select avg(F_RATING_UTILITIES) into val4 from Feedback where property_ID=Feedback.FK_P_ID;
+Select avg(F_RATING_LOCATION) into val5 from Feedback where property_ID=Feedback.FK_P_ID;
+Select avg(F_RATING_RENT) into val6 from Feedback where property_ID=Feedback.FK_P_ID;
+Select avg(F_RATING_APTCONDITION) into val7 from Feedback where property_ID=Feedback.FK_P_ID;
+Select avg(F_RATING_RECOMMENDATION) into val8 from Feedback where property_ID=Feedback.FK_P_ID;
+avg_rating := (val1 + val2+val3+val4+val5+val6+val7+val8);
+avg_rating := avg_rating/8;
+
+
+
+DBMS_OUTPUT.PUT_LINE('Avg rating is : ' || avg_rating || ' for Property ID :' || property_ID ||' ');
+END IF;
+EXCEPTION
+WHEN F_P_ID_EXCEPTION THEN
+DBMS_OUTPUT.PUT_LINE('Property ID not found in Parent table');
+END Rating;
 end;
+
+
+
+
+--execute INSERT_UPDATE_PACKAGE.insert_new_customer('Akash','Singh',9045408223,'akashs352@gmail.com','19-FEB-93','boston','downtown','Massachussetts',02125,'mayur','singh','friend',9595965858,'boston','12-dec-21',670507969,'Business analyst','M');
