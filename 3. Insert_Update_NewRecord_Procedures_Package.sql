@@ -148,7 +148,7 @@ END INSERT_COMPLAINT_TYPE;
 
 ------------------Creating a new lease------------------------------------------------------------------------------------
 
-PROCEDURE INSERT_LEASE (
+create or replace PROCEDURE INSERT_LEASE (
 fk_LEASE_P_ID1 IN number, 
 fk_LEASE_C_ID1 IN number,
 L_STRTDATE1 IN DATE,
@@ -228,6 +228,10 @@ EXCEPTION
 END;
 
 -----------------------------------------------------------------
+<<<<<<< HEAD:3. Insert_Update_NewRecord_Procedures_Package.sql
+=======
+----------------------------
+>>>>>>> 956df834913ccb5d98f556ec414dfc55dac622f8:InsertNewRecord_AllTables_Package.sql
 
 PROCEDURE INSERT_PROP(fk_PROPERTY_M_ID1 IN number, fk_PROPERTY_O_ID1 IN number, P_TYPE1 IN VARCHAR, P_City1 IN VARCHAR,P_Street1 IN VARCHAR,P_State1 IN VARCHAR, P_Zip1 IN VARCHAR, P_Description1 IN VARCHAR, P_Configuration1 IN VARCHAR,P_Discount1 IN NUMBER,P_Date_Listed1 IN DATE,P_Floor1 IN NUMBER,P_Carpet_Area1 IN NUMBER) 
 IS
@@ -911,6 +915,3 @@ END Rating;
 end;
 
 
-
-
---execute INSERT_UPDATE_PACKAGE.insert_new_customer('Akash','Singh',9045408223,'akashs352@gmail.com','19-FEB-93','boston','downtown','Massachussetts',02125,'mayur','singh','friend',9595965858,'boston','12-dec-21',670507969,'Business analyst','M');
