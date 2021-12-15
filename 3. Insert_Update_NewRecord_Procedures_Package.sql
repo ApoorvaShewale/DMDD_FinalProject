@@ -909,8 +909,3 @@ WHEN F_P_ID_EXCEPTION THEN
 DBMS_OUTPUT.PUT_LINE('Property ID not found in Parent table');
 END Rating;
 end;
-
-
-
-
---execute INSERT_UPDATE_PACKAGE.insert_new_customer('Akash','Singh',9045408223,'akashs352@gmail.com','19-FEB-93','boston','downtown','Massachussetts',02125,'mayur','singh','friend',9595965858,'boston','12-dec-21',670507969,'Business analyst','M');
