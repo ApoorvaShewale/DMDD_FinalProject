@@ -364,22 +364,23 @@ EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (2,2,2,to_date(''14-AUG-
 EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (3,3,3,to_date(''16-DEC-20'',''DD-MON-RR''),''Closed'',''Door Jammed'',''High'',7)';
 EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (4,4,4,to_date(''21-DEC-20'',''DD-MON-RR''),''Closed'',''Closet issue'',''Medium'',5)';
 EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (5,5,5,to_date(''01-JUL-21'',''DD-MON-RR''),''Closed'',''Kitchen Sink problem'',''High'',4)';
-EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (6,6,6,to_date(''15-NOV-12'',''DD-MON-RR''),''Closed'',''Cockroach issue'',''Low'',5)';
+EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (6,3,6,to_date(''15-NOV-12'',''DD-MON-RR''),''Closed'',''Cockroach issue'',''Low'',5)';
 EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (7,7,7,to_date(''28-DEC-21'',''DD-MON-RR''),''Closed'',''Rat issue'',''High'',8)';
 EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (8,8,8,to_date(''27-JUL-20'',''DD-MON-RR''),''Open'',''Termites issue'',''Low'',9)';
-EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (9,9,9,to_date(''20-FEB-19'',''DD-MON-RR''),''Closed'',''Bed Bug issue'',''Medium'',3)';
+EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (9,3,9,to_date(''20-FEB-19'',''DD-MON-RR''),''Closed'',''Bed Bug issue'',''Medium'',3)';
 EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (10,10,10,to_date(''13-OCT-21'',''DD-MON-RR''),''In Progress'',''Heater problem'',''Medium'',5)';
 EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (11,11,11,to_date(''29-DEC-21'',''DD-MON-RR''),''Open'',''AC problem'',''Low'',8)';
-EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (12,12,12,to_date(''02-JUL-21'',''DD-MON-RR''),''Closed'',''Flooring problem'',''High'',9)';
+EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (12,17,12,to_date(''02-JUL-21'',''DD-MON-RR''),''Closed'',''Flooring problem'',''High'',9)';
 EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (13,13,13,to_date(''27-DEC-21'',''DD-MON-RR''),''Open'',''Toilet clogged'',''Low'',4)';
 EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (14,14,14,to_date(''03-DEC-21'',''DD-MON-RR''),''Closed'',''Leakage '',''High'',10)';
 EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (15,15,15,to_date(''15-DEC-21'',''DD-MON-RR''),''In Progress'',''Restroom tap jammed'',''Medium'',8)';
-EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (16,16,16,to_date(''10-FEB-22'',''DD-MON-RR''),''Closed'',''Toilet flush issue'',''High'',5)';
+EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (16,17,16,to_date(''10-FEB-22'',''DD-MON-RR''),''Closed'',''Toilet flush issue'',''High'',5)';
 EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (17,17,17,to_date(''15-FEB-22'',''DD-MON-RR''),''In Progress'',''Wall cracks'',''Medium'',1)';
-EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (18,18,18,to_date(''27-DEC-21'',''DD-MON-RR''),''Open'',''Smoke Detecter issue'',''Low'',3)';
+EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (18,19,18,to_date(''27-DEC-21'',''DD-MON-RR''),''Open'',''Smoke Detecter issue'',''Low'',3)';
 EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (19,19,19,to_date(''02-JUL-21'',''DD-MON-RR''),''Open'',''Fire Alarm issue'',''Low'',7)';
-EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (20,20,20,to_date(''06-JUL-21'',''DD-MON-RR''),''In Progress'',''Shower not working'',''Medium'',6)';
+EXECUTE IMMEDIATE  'Insert into ADMIN.COMPLAINT  values (20,19,20,to_date(''06-JUL-21'',''DD-MON-RR''),''In Progress'',''Shower not working'',''Medium'',6)';
 COMMIT;
+
 
 ---------------------------INSERTING CUSTOMER_BANK_DETAIL-----------------------------
 
